@@ -10,7 +10,6 @@ function Sidebar(props) {
           <Folder
             name={f.name}
             id = {f.id}
-            selected = {true ? f.id === props.selectedFolderId : false}
             key={f.id} />
         )}
       </ul>
