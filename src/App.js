@@ -18,18 +18,27 @@ class App extends React.Component {
       </>
     );
   }
+  noteView(routeProps) {
+    const { notes, folders } = this.state;
+    const noteId = routeProps.match.params.noteId;
+    const note = notes.find(n => n.id === noteId)
+    return (
+      <>
+        <Sidebar folders={folders.filter(f => f.id === note.folderId )} />
+        <NoteDetail {...note} />
+      </>
+    );
+  }
   render() {
     return (
       <>
         <header>
           <h1><Link to="/">Noteful</Link></h1>
         </header>
-        <main className='App'>
-          <Sidebar folders={this.state.folders} />
-          <NoteList notes={this.state.notes} />
         <main className="App">
          <Route exact path ="/" render={(props) => this.listView(props)} />
          <Route exact path ="/folder/:folderId" render={(props) => this.listView(props)} />
+         <Route exact path ="/note/:noteId" render={(props) => this.noteView(props)} />
         </main>
       </>
     );
