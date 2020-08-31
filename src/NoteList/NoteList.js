@@ -1,13 +1,20 @@
 import React from 'react';
 import './NoteList.css';
-import Folder from '../Folder/Folder';
+import NotePreview from '../NotePreview/NotePreview';
 
 function NoteList(props) {
   return (
     <section className="NoteList">
       <ul>
-        {props.notes.map(f => <Folder name={f.name} id = {f.id} key={f.id} />)}
+        {props.notes.map(f =>
+          <NotePreview
+            name={f.name}
+            id = {f.id}
+            key={f.id}
+            modified={f.modified} />
+        )}
       </ul>
+      <button className="add-note-list">Add Note</button>
     </section>
   );
 }
