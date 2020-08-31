@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
 import Sidebar from './Sidebar/Sidebar';
+import NoteSidebar from './NoteSidebar/NoteSidebar';
 import NoteList from './NoteList/NoteList';
 import NoteDetail from './NoteDetail/NoteDetail';
 import store from './dummy-store.js';
@@ -24,7 +25,9 @@ class App extends React.Component {
     const note = notes.find(n => n.id === noteId)
     return (
       <>
-        <Sidebar folders={folders.filter(f => f.id === note.folderId )} />
+        <NoteSidebar
+          folder={folders.find(f => f.id === note.folderId )}
+          back={routeProps.history.goBack} />
         <NoteDetail {...note} />
       </>
     );

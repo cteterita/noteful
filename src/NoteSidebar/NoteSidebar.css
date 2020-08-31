@@ -1,0 +1,8 @@
+.NoteSidebar {
+  background-color: #dddddd;
+  flex: 1;
+}
+
+ul {
+  list-style: none;
+}
