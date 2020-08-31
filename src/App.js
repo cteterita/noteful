@@ -1,10 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import './App.css';
 
 function App() {
   return (
-    <main className='App'>
-      {/* content goes here */}
-    </main>
+    <>
+      <header>
+        <h1><Link to="/">Noteful</Link></h1>
+      </header>
+      <main className='App'>
+        {/* content goes here */}
+      </main>
+    </>
   );
 }
 
