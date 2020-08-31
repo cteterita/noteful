@@ -1,4 +1,4 @@
 .sidebar {
   background-color: #dddddd;
-  width: 20%;
+  flex: 1;
 }

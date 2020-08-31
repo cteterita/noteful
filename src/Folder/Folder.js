@@ -3,7 +3,7 @@ import './Folder.css';
 
 function Folder(props) {
   return (
-    <ul className="folder">
+    <ul className="Folder">
       {props.name}
     </ul>
   );
