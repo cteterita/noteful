@@ -6,7 +6,7 @@ function NotePreview(props) {
     <ul className="NotePreview">
       {props.name} <br />
       {props.modified}
-      <button class="delete-note-button">Delete</button>
+      <button className="delete-note-button">Delete</button>
     </ul>
   );
 }
