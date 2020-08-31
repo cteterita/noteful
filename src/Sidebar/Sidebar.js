@@ -6,7 +6,13 @@ function Sidebar(props) {
   return (
     <section className="sidebar">
       <ul>
-        {props.folders.map(f => <Folder name={f.name} id = {f.id} key={f.id} />)}
+        {props.folders.map(f =>
+          <Folder
+            name={f.name}
+            id = {f.id}
+            selected = {true ? f.id === props.selectedFolderId : false}
+            key={f.id} />
+        )}
       </ul>
       <button className="add-folder-button">Add Folder</button>
     </section>

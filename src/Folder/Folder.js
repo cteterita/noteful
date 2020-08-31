@@ -4,7 +4,7 @@ import './Folder.css';
 
 function Folder(props) {
   return (
-    <ul className="Folder {}">
+    <ul className={`Folder ${props.selected ? 'selected' : ''}`}>
       <Link to={`/folder/${props.id}`}>{props.name}</Link>
     </ul>
   );
