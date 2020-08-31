@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Link } from 'react-router-dom';
 import Sidebar from './Sidebar/Sidebar';
 import NoteList from './NoteList/NoteList';
+import NoteDetail from './NoteDetail/NoteDetail';
 import store from './dummy-store.js';
 import './App.css';
 
