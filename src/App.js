@@ -15,11 +15,11 @@ class App extends React.Component {
     console.log(`deleting note ${noteId}`);
   }
   listView(routeProps) {
-    const { notes, folders } = this.state;
+    const { notes } = this.state;
     const folderId = routeProps.match.params.folderId;
     return (
       <>
-        <Sidebar folders={folders} selectedFolderId={folderId} />
+        <Sidebar />
         <NoteList notes={folderId ? notes.filter(n => n.folderId === folderId) : notes} />
       </>
     );
