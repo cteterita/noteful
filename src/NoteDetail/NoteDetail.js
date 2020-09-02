@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from "react-router-dom";
 import './NoteDetail.css';
 import Context from '../Context';
 
@@ -6,7 +7,7 @@ class NoteDetail extends React.Component {
   static contextType = Context;
   deleteNote = () => {
     this.context.deleteNote(this.props.id);
-    // TODO: return to /
+    this.props.history.push('/');
   }
   render() {
     return (
@@ -27,4 +28,4 @@ class NoteDetail extends React.Component {
 
 }
 
-export default NoteDetail;
+export default withRouter(NoteDetail);
