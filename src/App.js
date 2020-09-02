@@ -49,9 +49,9 @@ class App extends React.Component {
         </header>
         <main className="App">
           <Context.Provider value={contextValue}>
-          <Route exact path ="/" render={(props) => this.listView(props)} />
-          <Route exact path ="/folder/:folderId" render={(props) => this.listView(props)} />
-          <Route exact path ="/note/:noteId" render={(props) => this.noteView(props)} />
+            <Route exact path ="/" render={(props) => this.listView(props)} />
+            <Route exact path ="/folder/:folderId" render={(props) => this.listView(props)} />
+            <Route exact path ="/note/:noteId" render={(props) => this.noteView(props)} />
           </Context.Provider>
         </main>
       </>
