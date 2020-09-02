@@ -1,17 +1,26 @@
 import React from 'react';
 import './NoteSidebar.css';
-import Folder from '../Folder/Folder.js';
+import Folder from '../Folder/Folder';
 
 function NoteSidebar(props) {
-  const { folder } = props;
+  const { folder, back } = props;
+  const { id, name } = folder;
   return (
     <section className="sidebar">
-      <button className="back-button" onClick={props.back}>Back</button>
+      <button
+        className="back-button"
+        onClick={back}
+        type="submit"
+      >
+        Back
+      </button>
       <ul>
-        <li><Folder
-            name={folder.name}
-            id = {folder.id}
-            key={folder.id} />
+        <li>
+          <Folder
+            name={name}
+            id={id}
+            key={id}
+          />
         </li>
       </ul>
     </section>

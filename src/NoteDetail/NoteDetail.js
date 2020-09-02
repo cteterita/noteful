@@ -11,23 +11,27 @@ class NoteDetail extends React.Component {
     deleteNote(id);
     history.push('/');
   }
+
   render() {
+    const { name, modified, content } = this.props;
     return (
       <div className="NoteDetail">
         <div className="NotePreview">
-          {this.props.name} <br />
-          {this.props.modified}
+          {name}
+          <br />
+          {modified}
           <button
             className="delete-note-button"
-            onClick={this.deleteNote}>
-              Delete
+            type="submit"
+            onClick={this.deleteNote}
+          >
+            Delete
           </button>
         </div>
-        {this.props.content}
+        {content}
       </div>
     );
   }
-
 }
 
 export default withRouter(NoteDetail);
