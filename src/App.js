@@ -21,7 +21,6 @@ class App extends React.Component {
     fetch('http://localhost:9090/folders')
       .then((response) => response.json())
       .then((response) => this.setState({ folders: response }));
-
     fetch('http://localhost:9090/notes')
       .then((response) => response.json())
       .then((response) => this.setState({ notes: response }));
@@ -41,10 +40,11 @@ class App extends React.Component {
   listView(routeProps) {
     const { notes } = this.state;
     const { folderId } = routeProps.match.params;
+    const filters = [{ attr: 'folderId', value: folderId }];
     return (
       <>
         <Sidebar />
-        <NoteList notes={folderId ? notes.filter((n) => n.folderId === folderId) : notes} />
+        <NoteList notes={notes} filters={filters} />
       </>
     );
   }

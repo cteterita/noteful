@@ -3,11 +3,18 @@ import './NoteList.css';
 import NotePreview from '../NotePreview/NotePreview';
 
 function NoteList(props) {
-  const { notes } = props;
+  const { notes, filters } = props;
+  let filteredNotes = notes;
+  filters.forEach((filter) => {
+    const { attr, value } = filter;
+    if (value) {
+      filteredNotes = notes.filter((n) => n[attr] === value);
+    }
+  });
   return (
     <section className="NoteList">
       <ul>
-        {notes.map((f) => (
+        {filteredNotes.map((f) => (
           <NotePreview
             name={f.name}
             id={f.id}
@@ -25,5 +32,10 @@ function NoteList(props) {
     </section>
   );
 }
+
+NoteList.defaultProps = {
+  notes: [],
+  filters: [],
+};
 
 export default NoteList;
