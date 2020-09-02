@@ -28,18 +28,19 @@ class App extends React.Component {
   }
 
   deleteNote = (noteId) => {
+    const { notes } = this.state;
     fetch(`http://localhost:9090/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json',
       },
     });
-    this.setState({ notes: this.state.notes.filter((n) => n.id !== noteId) });
+    this.setState({ notes: notes.filter((n) => n.id !== noteId) });
   }
 
   listView(routeProps) {
     const { notes } = this.state;
-    const folderId = routeProps.match.params.folderId;
+    const { folderId } = routeProps.match.params;
     return (
       <>
         <Sidebar />
@@ -50,15 +51,16 @@ class App extends React.Component {
 
   noteView(routeProps) {
     const { notes, folders } = this.state;
-    const noteId = routeProps.match.params.noteId;
+    const { noteId } = routeProps.match.params;
     const note = notes.find((n) => n.id === noteId) || null;
+    const { name, modified, content } = note;
     return (
       <>
         <NoteSidebar
           folder={note ? folders.find((f) => f.id === note.folderId) : ''}
           back={routeProps.history.goBack}
         />
-        <NoteDetail {...note} />
+        <NoteDetail name={name} modified={modified} content={content} />
       </>
     );
   }
