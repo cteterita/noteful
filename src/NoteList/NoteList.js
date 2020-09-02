@@ -3,18 +3,25 @@ import './NoteList.css';
 import NotePreview from '../NotePreview/NotePreview';
 
 function NoteList(props) {
+  const { notes } = props;
   return (
     <section className="NoteList">
       <ul>
-        {props.notes.map(f =>
+        {notes.map((f) => (
           <NotePreview
             name={f.name}
-            id = {f.id}
+            id={f.id}
             key={f.id}
-            modified={f.modified} />
-        )}
+            modified={f.modified}
+          />
+        ))}
       </ul>
-      <button className="add-note-list">Add Note</button>
+      <button
+        className="add-note-list"
+        type="submit"
+      >
+        Add Note
+      </button>
     </section>
   );
 }

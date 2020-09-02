@@ -5,62 +5,69 @@ import Sidebar from './Sidebar/Sidebar';
 import NoteSidebar from './NoteSidebar/NoteSidebar';
 import NoteList from './NoteList/NoteList';
 import NoteDetail from './NoteDetail/NoteDetail';
-import store from './dummy-store.js';
+import store from './dummy-store';
 import './App.css';
 
 class App extends React.Component {
-  state = {
-    folders: [],
-    notes: []
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      folders: [],
+      notes: [],
+    };
+  }
+
   componentDidMount() {
     fetch('http://localhost:9090/folders')
-      .then(response => response.json())
-      .then(response => this.setState({ folders: response}));
+      .then((response) => response.json())
+      .then((response) => this.setState({ folders: response }));
 
     fetch('http://localhost:9090/notes')
-      .then(response => response.json())
-      .then(response => this.setState({ notes: response}));
+      .then((response) => response.json())
+      .then((response) => this.setState({ notes: response }));
   }
+
   deleteNote = (noteId) => {
-    //To implement
-    console.log(`deleting note ${noteId}`);
     fetch(`http://localhost:9090/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
       },
     });
-    this.setState({notes: this.state.notes.filter(n => n.id !== noteId)});
+    this.setState({ notes: this.state.notes.filter((n) => n.id !== noteId) });
   }
+
   listView(routeProps) {
     const { notes } = this.state;
     const folderId = routeProps.match.params.folderId;
     return (
       <>
         <Sidebar />
-        <NoteList notes={folderId ? notes.filter(n => n.folderId === folderId) : notes} />
+        <NoteList notes={folderId ? notes.filter((n) => n.folderId === folderId) : notes} />
       </>
     );
   }
+
   noteView(routeProps) {
     const { notes, folders } = this.state;
     const noteId = routeProps.match.params.noteId;
-    const note = notes.find(n => n.id === noteId)
+    const note = notes.find((n) => n.id === noteId);
     return (
       <>
         <NoteSidebar
-          folder={folders.find(f => f.id === note.folderId )}
-          back={routeProps.history.goBack} />
+          folder={folders.find((f) => f.id === note.folderId)}
+          back={routeProps.history.goBack}
+        />
         <NoteDetail {...note} />
       </>
     );
   }
+
   render() {
     const contextValue = {
       ...store,
-      deleteNote: this.deleteNote
-    }
+      deleteNote: this.deleteNote,
+    };
     return (
       <>
         <header>
@@ -68,9 +75,9 @@ class App extends React.Component {
         </header>
         <main className="App">
           <Context.Provider value={contextValue}>
-            <Route exact path ="/" render={(props) => this.listView(props)} />
-            <Route exact path ="/folder/:folderId" render={(props) => this.listView(props)} />
-            <Route exact path ="/note/:noteId" render={(props) => this.noteView(props)} />
+            <Route exact path="/" render={(props) => this.listView(props)} />
+            <Route exact path="/folder/:folderId" render={(props) => this.listView(props)} />
+            <Route exact path="/note/:noteId" render={(props) => this.noteView(props)} />
           </Context.Provider>
         </main>
       </>
