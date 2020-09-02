@@ -51,11 +51,11 @@ class App extends React.Component {
   noteView(routeProps) {
     const { notes, folders } = this.state;
     const noteId = routeProps.match.params.noteId;
-    const note = notes.find((n) => n.id === noteId);
+    const note = notes.find((n) => n.id === noteId) || null;
     return (
       <>
         <NoteSidebar
-          folder={folders.find((f) => f.id === note.folderId)}
+          folder={note ? folders.find((f) => f.id === note.folderId) : ''}
           back={routeProps.history.goBack}
         />
         <NoteDetail {...note} />

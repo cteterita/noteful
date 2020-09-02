@@ -5,6 +5,12 @@ import Context from '../Context';
 
 class NoteDetail extends React.Component {
   static contextType = Context;
+  static defaultProps = {
+    name: '',
+    modified: '',
+    content: '',
+  };
+
   deleteNote = () => {
     const { id, history } = this.props;
     const { deleteNote } = this.context;

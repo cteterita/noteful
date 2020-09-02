@@ -27,4 +27,11 @@ function NoteSidebar(props) {
   );
 }
 
+NoteSidebar.defaultProps = {
+  folder: {
+    id: '',
+    name: '',
+  },
+};
+
 export default NoteSidebar;
