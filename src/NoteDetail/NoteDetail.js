@@ -1,13 +1,15 @@
 import React from 'react';
-import { withRouter } from "react-router-dom";
+import { withRouter } from 'react-router-dom';
 import './NoteDetail.css';
 import Context from '../Context';
 
 class NoteDetail extends React.Component {
   static contextType = Context;
   deleteNote = () => {
-    this.context.deleteNote(this.props.id);
-    this.props.history.push('/');
+    const { id, history } = this.props;
+    const { deleteNote } = this.context;
+    deleteNote(id);
+    history.push('/');
   }
   render() {
     return (
