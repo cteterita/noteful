@@ -1,15 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './NotePreview.css';
+import Context from '../Context';
 
-function NotePreview(props) {
-  return (
-    <ul className="NotePreview">
-      <Link to={`/note/${props.id}`}>{props.name}</Link> <br />
-      {props.modified}
-      <button className="delete-note-button">Delete</button>
-    </ul>
-  );
+class NotePreview extends React.Component {
+  static contextType = Context;
+  render() {
+    return (
+      <ul className="NotePreview">
+        <Link to={`/note/${this.props.id}`}>{this.props.name}</Link> <br />
+        {this.props.modified}
+        <button className="delete-note-button" onClick={() => this.context.deleteNote(this.props.id)}>Delete</button>
+      </ul>
+    );
+  }
 }
 
 export default NotePreview;
