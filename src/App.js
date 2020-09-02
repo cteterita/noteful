@@ -9,10 +9,29 @@ import store from './dummy-store.js';
 import './App.css';
 
 class App extends React.Component {
-  state = store;
-  deleteNote(noteId) {
+  state = {
+    folders: [],
+    notes: []
+  };
+  componentDidMount() {
+    fetch('http://localhost:9090/folders')
+      .then(response => response.json())
+      .then(response => this.setState({ folders: response}));
+
+    fetch('http://localhost:9090/notes')
+      .then(response => response.json())
+      .then(response => this.setState({ notes: response}));
+  }
+  deleteNote = (noteId) => {
     //To implement
     console.log(`deleting note ${noteId}`);
+    fetch(`http://localhost:9090/notes/${noteId}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json'
+      },
+    });
+    this.setState({notes: this.state.notes.filter(n => n.id !== noteId)});
   }
   listView(routeProps) {
     const { notes } = this.state;
