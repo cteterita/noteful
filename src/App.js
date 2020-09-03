@@ -5,7 +5,6 @@ import Sidebar from './Sidebar/Sidebar';
 import NoteSidebar from './NoteSidebar/NoteSidebar';
 import NoteList from './NoteList/NoteList';
 import NoteDetail from './NoteDetail/NoteDetail';
-import store from './dummy-store';
 import './App.css';
 
 class App extends React.Component {
@@ -66,7 +65,7 @@ class App extends React.Component {
 
   render() {
     const contextValue = {
-      ...store,
+      ...this.state,
       deleteNote: this.deleteNote,
     };
     return (
