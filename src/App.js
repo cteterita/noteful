@@ -7,6 +7,30 @@ import NoteList from './NoteList/NoteList';
 import NoteDetail from './NoteDetail/NoteDetail';
 import './App.css';
 
+function listView(routeProps) {
+  const { folderId } = routeProps.match.params;
+  const filters = [{ attr: 'folderId', value: folderId }];
+  return (
+    <>
+      <Sidebar />
+      <NoteList filters={filters} />
+    </>
+  );
+}
+
+function noteView(routeProps) {
+  const { noteId } = routeProps.match.params;
+  return (
+    <>
+      <NoteSidebar
+        noteId={noteId}
+        back={routeProps.history.goBack}
+      />
+      <NoteDetail noteId={noteId} />
+    </>
+  );
+}
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -36,33 +60,6 @@ class App extends React.Component {
     this.setState({ notes: notes.filter((n) => n.id !== noteId) });
   }
 
-  listView(routeProps) {
-    const { folderId } = routeProps.match.params;
-    const filters = [{ attr: 'folderId', value: folderId }];
-    return (
-      <>
-        <Sidebar />
-        <NoteList filters={filters} />
-      </>
-    );
-  }
-
-  noteView(routeProps) {
-    const { notes, folders } = this.state;
-    const { noteId } = routeProps.match.params;
-    const note = notes.find((n) => n.id === noteId) || null;
-    const { name, modified, content, id } = note;
-    return (
-      <>
-        <NoteSidebar
-          folder={note ? folders.find((f) => f.id === note.folderId) : ''}
-          back={routeProps.history.goBack}
-        />
-      <NoteDetail name={name} modified={modified} content={content} id={id} />
-      </>
-    );
-  }
-
   render() {
     const contextValue = {
       ...this.state,
@@ -75,9 +72,9 @@ class App extends React.Component {
         </header>
         <main className="App">
           <Context.Provider value={contextValue}>
-            <Route exact path="/" render={(props) => this.listView(props)} />
-            <Route exact path="/folder/:folderId" render={(props) => this.listView(props)} />
-            <Route exact path="/note/:noteId" render={(props) => this.noteView(props)} />
+            <Route exact path="/" component={listView} />
+            <Route exact path="/folder/:folderId" component={listView} />
+            <Route exact path="/note/:noteId" component={noteView} />
           </Context.Provider>
         </main>
       </>
