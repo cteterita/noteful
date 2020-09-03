@@ -52,14 +52,14 @@ class App extends React.Component {
     const { notes, folders } = this.state;
     const { noteId } = routeProps.match.params;
     const note = notes.find((n) => n.id === noteId) || null;
-    const { name, modified, content } = note;
+    const { name, modified, content, id } = note;
     return (
       <>
         <NoteSidebar
           folder={note ? folders.find((f) => f.id === note.folderId) : ''}
           back={routeProps.history.goBack}
         />
-        <NoteDetail name={name} modified={modified} content={content} />
+      <NoteDetail name={name} modified={modified} content={content} id={id} />
       </>
     );
   }
