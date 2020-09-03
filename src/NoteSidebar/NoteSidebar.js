@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Context from '../Context';
 import './NoteSidebar.css';
 import Folder from '../Folder/Folder';
@@ -42,6 +43,11 @@ function NoteSidebar(props) {
 
 NoteSidebar.defaultProps = {
   noteId: '',
+};
+
+NoteSidebar.propTypes = {
+  noteId: PropTypes.string,
+  back: PropTypes.func.isRequired,
 };
 
 export default NoteSidebar;

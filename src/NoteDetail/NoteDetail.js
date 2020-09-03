@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './NoteDetail.css';
 import Context from '../Context';
 
@@ -10,11 +10,16 @@ class NoteDetail extends React.Component {
     noteId: '',
   };
 
+  static propTypes = {
+    noteId: PropTypes.string,
+    push: PropTypes.func.isRequired,
+  }
+
   deleteNote = () => {
-    const { id, history } = this.props;
+    const { noteId, push } = this.props;
     const { deleteNote } = this.context;
-    deleteNote(id);
-    history.push('/');
+    deleteNote(noteId);
+    push('/');
   }
 
   render() {
@@ -45,4 +50,4 @@ class NoteDetail extends React.Component {
   }
 }
 
-export default withRouter(NoteDetail);
+export default NoteDetail;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './NoteList.css';
 import NotePreview from '../NotePreview/NotePreview';
 import Context from '../Context';
@@ -7,9 +8,12 @@ class NoteList extends React.Component {
   static contextType = Context;
 
   static defaultProps = {
-    notes: [],
     filters: [],
   };
+
+  static propTypes = {
+    filters: PropTypes.arrayOf(PropTypes.object),
+  }
 
   filteredNotes() {
     const { filters } = this.props;

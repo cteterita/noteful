@@ -26,7 +26,7 @@ function noteView(routeProps) {
         noteId={noteId}
         back={routeProps.history.goBack}
       />
-      <NoteDetail noteId={noteId} />
+      <NoteDetail noteId={noteId} push={routeProps.history.push} />
     </>
   );
 }
