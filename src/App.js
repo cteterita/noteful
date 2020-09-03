@@ -38,13 +38,12 @@ class App extends React.Component {
   }
 
   listView(routeProps) {
-    const { notes } = this.state;
     const { folderId } = routeProps.match.params;
     const filters = [{ attr: 'folderId', value: folderId }];
     return (
       <>
         <Sidebar />
-        <NoteList notes={notes} filters={filters} />
+        <NoteList filters={filters} />
       </>
     );
   }
