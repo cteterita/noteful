@@ -5,6 +5,7 @@ import Sidebar from './Sidebar/Sidebar';
 import NoteSidebar from './NoteSidebar/NoteSidebar';
 import NoteList from './NoteList/NoteList';
 import NoteDetail from './NoteDetail/NoteDetail';
+import AddFolder from './AddFolder/AddFolder';
 import './App.css';
 
 function listView(routeProps) {
@@ -27,6 +28,17 @@ function noteView(routeProps) {
         back={routeProps.history.goBack}
       />
       <NoteDetail noteId={noteId} push={routeProps.history.push} />
+    </>
+  );
+}
+
+function addFolderView(routeProps) {
+  return (
+    <>
+      <Sidebar />
+      <AddFolder
+        back={routeProps.history.goBack}
+      />
     </>
   );
 }
@@ -60,10 +72,27 @@ class App extends React.Component {
     this.setState({ notes: notes.filter((n) => n.id !== noteId) });
   }
 
+  addFolder = (folderName) => {
+    const body = { name: folderName };
+    fetch('http://localhost:9090/folders', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    })
+      .then((response) => response.json())
+      .then((folder) => {
+        const { folders } = this.state;
+        this.setState({ folders: [...folders, folder] });
+      });
+  }
+
   render() {
     const contextValue = {
       ...this.state,
       deleteNote: this.deleteNote,
+      addFolder: this.addFolder,
     };
     return (
       <>
@@ -75,6 +104,7 @@ class App extends React.Component {
             <Route exact path="/" component={listView} />
             <Route exact path="/folder/:folderId" component={listView} />
             <Route exact path="/note/:noteId" component={noteView} />
+            <Route exact path="/add-folder" component={addFolderView} />
           </Context.Provider>
         </main>
       </>
