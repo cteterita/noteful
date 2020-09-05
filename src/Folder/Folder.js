@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './Folder.css';
 
 function Folder(props) {
@@ -12,5 +13,15 @@ function Folder(props) {
     </NavLink>
   );
 }
+
+Folder.defaultProps = {
+  id: '',
+  name: '',
+};
+
+Folder.propTypes = {
+  id: PropTypes.string,
+  name: PropTypes.string,
+};
 
 export default Folder;
