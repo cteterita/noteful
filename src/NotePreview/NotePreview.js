@@ -29,10 +29,16 @@ function NotePreview(props) {
   );
 }
 
+NotePreview.defaultProps = {
+  id: '',
+  name: '',
+  modified: '',
+};
+
 NotePreview.propTypes = {
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  modified: PropTypes.string.isRequired,
+  id: PropTypes.string,
+  name: PropTypes.string,
+  modified: PropTypes.string,
 };
 
 export default NotePreview;
