@@ -9,6 +9,8 @@ import AddFolder from './AddFolder/AddFolder';
 import AddNote from './AddNote/AddNote';
 import './App.css';
 
+const BASE_URL = 'http://localhost:9090';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -19,17 +21,20 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:9090/folders')
-      .then((response) => response.json())
-      .then((response) => this.setState({ folders: response }));
-    fetch('http://localhost:9090/notes')
-      .then((response) => response.json())
-      .then((response) => this.setState({ notes: response }));
+    const fetchFolders = fetch(`${BASE_URL}/folders`);
+    const fetchNotes = fetch(`${BASE_URL}/notes`);
+    Promise.all([fetchFolders, fetchNotes])
+      .then((responses) => {
+        responses[0].json()
+          .then((folders) => this.setState({ folders }));
+        responses[1].json()
+          .then((notes) => this.setState({ notes }));
+      });
   }
 
   deleteNote = (noteId) => {
     const { notes } = this.state;
-    fetch(`http://localhost:9090/notes/${noteId}`, {
+    fetch(`${BASE_URL}/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json',
@@ -40,7 +45,7 @@ class App extends React.Component {
 
   addFolder = (name) => {
     const body = { name };
-    fetch('http://localhost:9090/folders', {
+    fetch(`${BASE_URL}/folders`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -61,7 +66,7 @@ class App extends React.Component {
       folderId,
       modified: Date.now().toString(),
     };
-    fetch('http://localhost:9090/notes', {
+    fetch(`${BASE_URL}/notes`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
