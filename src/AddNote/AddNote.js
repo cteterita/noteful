@@ -23,7 +23,7 @@ class AddFolder extends React.Component {
     const { addNote } = this.context;
     const noteForm = e.target;
     addNote(noteForm.noteName.value, noteForm.noteContent.value, noteForm.folderId.value);
-    e.target.reset();
+    noteForm.reset();
   }
 
   render() {

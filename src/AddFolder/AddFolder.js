@@ -21,9 +21,9 @@ class AddFolder extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { addFolder } = this.context;
-    const nameInput = e.target.folderName;
-    addFolder(nameInput.value);
-    nameInput.value = '';
+    const folderForm = e.target;
+    addFolder(folderForm.folderName.value);
+    folderForm.reset();
   }
 
   render() {
