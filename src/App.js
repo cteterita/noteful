@@ -6,6 +6,7 @@ import NoteSidebar from './NoteSidebar/NoteSidebar';
 import NoteList from './NoteList/NoteList';
 import NoteDetail from './NoteDetail/NoteDetail';
 import AddFolder from './AddFolder/AddFolder';
+import AddNote from './AddNote/AddNote';
 import './App.css';
 
 class App extends React.Component {
@@ -37,8 +38,8 @@ class App extends React.Component {
     this.setState({ notes: notes.filter((n) => n.id !== noteId) });
   }
 
-  addFolder = (folderName) => {
-    const body = { name: folderName };
+  addFolder = (name) => {
+    const body = { name };
     fetch('http://localhost:9090/folders', {
       method: 'POST',
       headers: {
@@ -53,11 +54,33 @@ class App extends React.Component {
       });
   }
 
+  addNote = (name, content, folderId) => {
+    const body = {
+      name,
+      content,
+      folderId,
+      modified: Date.now().toString(),
+    };
+    fetch('http://localhost:9090/notes', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    })
+      .then((response) => response.json())
+      .then((note) => {
+        const { notes } = this.state;
+        this.setState({ notes: [...notes, note] });
+      });
+  }
+
   render() {
     const contextValue = {
       ...this.state,
       deleteNote: this.deleteNote,
       addFolder: this.addFolder,
+      addNote: this.addNote,
     };
     return (
       <>
@@ -81,6 +104,10 @@ class App extends React.Component {
             {/* Route for add folder path */}
             <Route exact path="/add-folder" component={Sidebar} />
             <Route exact path="/add-folder" component={AddFolder} />
+
+            {/* Route for add note path */}
+            <Route exact path="/add-note" component={Sidebar} />
+            <Route exact path="/add-note" component={AddNote} />
           </Context.Provider>
         </main>
       </>

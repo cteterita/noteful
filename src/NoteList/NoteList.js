@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import './NoteList.css';
 import NotePreview from '../NotePreview/NotePreview';
 import Context from '../Context';
@@ -43,12 +44,14 @@ class NoteList extends React.Component {
             />
           ))}
         </ul>
-        <button
-          className="add-note-list"
-          type="submit"
-        >
-          Add Note
-        </button>
+        <Link to="/add-note">
+          <button
+            className="add-note-list"
+            type="submit"
+          >
+            Add Note
+          </button>
+        </Link>
       </section>
     );
   }
