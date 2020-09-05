@@ -7,23 +7,42 @@ class NoteDetail extends React.Component {
   static contextType = Context;
 
   static defaultProps = {
-    noteId: '',
+    match: {
+      params: {
+        noteId: '',
+      },
+    },
+    history: {
+      push: () => {},
+    },
   };
 
   static propTypes = {
-    noteId: PropTypes.string,
-    push: PropTypes.func.isRequired,
+    match: PropTypes.shape({
+      params: PropTypes.shape({
+        noteId: PropTypes.string,
+      }),
+    }),
+    history: PropTypes.shape({
+      push: PropTypes.func,
+    }),
   }
 
   deleteNote = () => {
-    const { noteId, push } = this.props;
+    // Delete the note using noteId from routeProps
+    const { match, history } = this.props;
+    const { noteId } = match.params;
     const { deleteNote } = this.context;
     deleteNote(noteId);
+
+    // Navigate back to the root directory
+    const { push } = history;
     push('/');
   }
 
   render() {
-    const { noteId } = this.props;
+    const { match } = this.props;
+    const { noteId } = match.params;
     const { notes } = this.context;
     const note = notes.find((n) => n.id === noteId);
     if (note) {

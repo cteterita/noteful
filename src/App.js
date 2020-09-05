@@ -8,41 +8,6 @@ import NoteDetail from './NoteDetail/NoteDetail';
 import AddFolder from './AddFolder/AddFolder';
 import './App.css';
 
-function listView(routeProps) {
-  const { folderId } = routeProps.match.params;
-  const filters = [{ attr: 'folderId', value: folderId }];
-  return (
-    <>
-      <Sidebar />
-      <NoteList filters={filters} />
-    </>
-  );
-}
-
-function noteView(routeProps) {
-  const { noteId } = routeProps.match.params;
-  return (
-    <>
-      <NoteSidebar
-        noteId={noteId}
-        back={routeProps.history.goBack}
-      />
-      <NoteDetail noteId={noteId} push={routeProps.history.push} />
-    </>
-  );
-}
-
-function addFolderView(routeProps) {
-  return (
-    <>
-      <Sidebar />
-      <AddFolder
-        back={routeProps.history.goBack}
-      />
-    </>
-  );
-}
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -101,10 +66,21 @@ class App extends React.Component {
         </header>
         <main className="App">
           <Context.Provider value={contextValue}>
-            <Route exact path="/" component={listView} />
-            <Route exact path="/folder/:folderId" component={listView} />
-            <Route exact path="/note/:noteId" component={noteView} />
-            <Route exact path="/add-folder" component={addFolderView} />
+            {/* Route for root path */}
+            <Route exact path="/" component={Sidebar} />
+            <Route exact path="/" component={NoteList} />
+
+            {/* Route for folder path */}
+            <Route exact path="/folder/:folderId" component={Sidebar} />
+            <Route exact path="/folder/:folderId" component={NoteList} />
+
+            {/* Route for note path */}
+            <Route exact path="/note/:noteId" component={NoteSidebar} />
+            <Route exact path="/note/:noteId" component={NoteDetail} />
+
+            {/* Route for add folder path */}
+            <Route exact path="/add-folder" component={Sidebar} />
+            <Route exact path="/add-folder" component={AddFolder} />
           </Context.Provider>
         </main>
       </>

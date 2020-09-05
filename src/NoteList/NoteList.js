@@ -8,24 +8,26 @@ class NoteList extends React.Component {
   static contextType = Context;
 
   static defaultProps = {
-    filters: [],
-  };
+    match: {
+      params: {
+        folderId: '',
+      },
+    },
+  }
 
   static propTypes = {
-    filters: PropTypes.arrayOf(PropTypes.object),
+    match: PropTypes.shape({
+      params: PropTypes.shape({
+        folderId: PropTypes.string,
+      }),
+    }),
   }
 
   filteredNotes() {
-    const { filters } = this.props;
+    const { match } = this.props;
+    const { folderId } = match.params;
     const { notes } = this.context;
-    let filteredNotes = notes;
-    filters.forEach((filter) => {
-      const { attr, value } = filter;
-      if (value) {
-        filteredNotes = notes.filter((n) => n[attr] === value);
-      }
-    });
-    return filteredNotes;
+    return folderId ? notes.filter((n) => n.folderId === folderId) : notes;
   }
 
   render() {

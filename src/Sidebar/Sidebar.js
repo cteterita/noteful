@@ -18,7 +18,7 @@ function Sidebar() {
               />
             ))}
           </ul>
-          <Link to='/add-folder'>
+          <Link to="/add-folder">
             <button
               className="add-folder-button"
               type="submit"

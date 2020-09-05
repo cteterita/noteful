@@ -8,7 +8,9 @@ function NoteSidebar(props) {
   return (
     <Context.Consumer>
       {(context) => {
-        const { noteId, back } = props;
+        const { match, history } = props;
+        const { noteId } = match.params;
+        const { goBack } = history;
         const { notes, folders } = context;
         const note = notes.find((n) => n.id === noteId);
         if (note) {
@@ -18,7 +20,7 @@ function NoteSidebar(props) {
             <section className="sidebar">
               <button
                 className="back-button"
-                onClick={back}
+                onClick={goBack}
                 type="submit"
               >
                 Back
@@ -42,12 +44,25 @@ function NoteSidebar(props) {
 }
 
 NoteSidebar.defaultProps = {
-  noteId: '',
+  match: {
+    params: {
+      noteId: '',
+    },
+  },
+  history: {
+    goBack: () => {},
+  },
 };
 
 NoteSidebar.propTypes = {
-  noteId: PropTypes.string,
-  back: PropTypes.func.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      noteId: PropTypes.string,
+    }),
+  }),
+  history: PropTypes.shape({
+    goBack: PropTypes.func,
+  }),
 };
 
 export default NoteSidebar;

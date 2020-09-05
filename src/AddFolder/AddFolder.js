@@ -6,27 +6,39 @@ import Context from '../Context';
 class AddFolder extends React.Component {
   static contextType = Context;
 
+  static defaultProps = {
+    history: {
+      goBack: () => {},
+    },
+  }
+
   static propTypes = {
-    back: PropTypes.func.isRequired,
+    history: PropTypes.shape({
+      goBack: PropTypes.func,
+    }),
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
     const { addFolder } = this.context;
-    addFolder(e.target.folderName.value);
-    e.target.folderName.value = '';
+    const nameInput = e.target.folderName;
+    addFolder(nameInput.value);
+    nameInput.value = '';
   }
 
   render() {
-    const { back } = this.props;
+    const { history } = this.props;
+    const { goBack } = history;
     return (
       <div className="form-holder">
         <form onSubmit={(e) => this.handleSubmit(e)}>
-          <label htmlFor="folderName">Folder Name *</label>
-          <input required type="text" id="folderName" />
+          <label htmlFor="folderName">
+            Folder Name
+            <input required type="text" id="folderName" />
+          </label>
           <button type="submit">Submit</button>
         </form>
-        <button type="submit" onClick={back}>Back</button>
+        <button type="submit" onClick={goBack}>Back</button>
       </div>
     );
   }
