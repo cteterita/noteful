@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './AddNote.css';
 import Context from '../Context';
 
-class AddFolder extends React.Component {
+class AddNote extends React.Component {
   static contextType = Context;
 
   static defaultProps = {
@@ -57,4 +57,4 @@ class AddFolder extends React.Component {
   }
 }
 
-export default AddFolder;
+export default AddNote;
