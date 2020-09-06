@@ -1,7 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './NoteError.css';
 
 class NoteError extends React.Component {
+  static propTypes = {
+    children: PropTypes.node.isRequired,
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -9,8 +14,7 @@ class NoteError extends React.Component {
     };
   }
 
-  static getDerivedStateFromError(error) {
-    console.log(error);
+  static getDerivedStateFromError() {
     return { hasError: true };
   }
 
