@@ -47,7 +47,7 @@ class AddNote extends React.Component {
           </label>
           <button type="submit">Submit</button>
         </form>
-        <button type="submit" onClick={goBack}>Back</button>
+        <button type="button" onClick={goBack}>Back</button>
       </div>
     );
   }

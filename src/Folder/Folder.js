@@ -6,11 +6,11 @@ import './Folder.css';
 function Folder(props) {
   const { id, name } = props;
   return (
-    <NavLink to={`/folder/${id}`}>
-      <ul className="Folder">
+    <li className="Folder">
+      <NavLink to={`/folder/${id}`}>
         {name}
-      </ul>
-    </NavLink>
+      </NavLink>
+    </li>
   );
 }
 

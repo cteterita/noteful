@@ -11,18 +11,18 @@ function NotePreview(props) {
         const { id, name, modified } = props;
         const { deleteNote } = context;
         return (
-          <ul className="NotePreview">
+          <li className="NotePreview">
             <Link to={`/note/${id}`}>{name}</Link>
             <br />
             {modified}
             <button
               className="delete-note-button"
               onClick={() => deleteNote(id)}
-              type="submit"
+              type="button"
             >
               Delete
             </button>
-          </ul>
+          </li>
         );
       }}
     </Context.Consumer>
