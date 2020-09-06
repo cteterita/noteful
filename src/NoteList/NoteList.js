@@ -25,26 +25,36 @@ class NoteList extends React.Component {
   }
 
   filteredNotes() {
-    // If there is a folderId in match.params, filter for notes in that folder
     const { match } = this.props;
     const { folderId } = match.params;
-    const { notes } = this.context;
-    return folderId ? notes.filter((n) => n.folderId === folderId) : notes;
+    const { notes, folders } = this.context;
+    let filteredNotes = notes;
+    // If there is a folderId in match.params, filter for notes in that folder
+    if (folderId) {
+      const folder = folders.find((f) => f.id === folderId);
+      if (!folder) return (<h4>Folder not found</h4>);
+      filteredNotes = notes.filter((n) => n.folderId === folderId);
+      if (filteredNotes.length === 0) return (<h4>No notes in this folder</h4>);
+    }
+    // Return the full list of filteredNotes
+    return (
+      <ul>
+        {filteredNotes.map((f) => (
+          <NotePreview
+            name={f.name}
+            id={f.id}
+            key={f.id}
+            modified={f.modified}
+          />
+        ))}
+      </ul>
+    );
   }
 
   render() {
     return (
       <section className="NoteList">
-        <ul>
-          {this.filteredNotes().map((f) => (
-            <NotePreview
-              name={f.name}
-              id={f.id}
-              key={f.id}
-              modified={f.modified}
-            />
-          ))}
-        </ul>
+        {this.filteredNotes()}
         <Link to="/add-note">
           <button
             className="add-note-list"
