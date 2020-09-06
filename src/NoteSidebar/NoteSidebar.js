@@ -13,29 +13,32 @@ function NoteSidebar(props) {
         const { goBack } = history;
         const { notes, folders } = context;
         const note = notes.find((n) => n.id === noteId);
+        let folderList = <></>;
         if (note) {
           const folder = folders.find((f) => f.id === note.folderId);
           const { id, name } = folder;
-          return (
-            <section className="sidebar">
-              <button
-                className="back-button"
-                onClick={goBack}
-                type="submit"
-              >
-                Back
-              </button>
-              <ul>
-                <Folder
-                  name={name}
-                  id={id}
-                  key={id}
-                />
-              </ul>
-            </section>
+          folderList = (
+            <ul>
+              <Folder
+                name={name}
+                id={id}
+                key={id}
+              />
+            </ul>
           );
         }
-        return <></>;
+        return (
+          <section className="sidebar">
+            <button
+              className="back-button"
+              onClick={goBack}
+              type="submit"
+            >
+              Back
+            </button>
+            {folderList}
+          </section>
+        );
       }}
     </Context.Consumer>
   );

@@ -36,7 +36,7 @@ class NoteDetail extends React.Component {
     if (note) {
       const { name, modified, content } = note;
       return (
-        <div className="NoteDetail">
+        <section className="NoteDetail">
           <div className="NotePreview">
             {name}
             <br />
@@ -50,10 +50,14 @@ class NoteDetail extends React.Component {
             </button>
           </div>
           {content}
-        </div>
+        </section>
       );
     }
-    return <></>;
+    return (
+      <section className="NoteDetail">
+        <h2>Note not found</h2>
+      </section>
+    );
   }
 }
 
