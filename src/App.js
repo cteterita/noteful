@@ -7,6 +7,7 @@ import NoteList from './NoteList/NoteList';
 import NoteDetail from './NoteDetail/NoteDetail';
 import AddFolder from './AddFolder/AddFolder';
 import AddNote from './AddNote/AddNote';
+import NoteError from './NoteError/NoteError';
 import './App.css';
 
 const BASE_URL = 'http://localhost:9090';
@@ -110,8 +111,10 @@ class App extends React.Component {
             <Route exact path="/folder/:folderId" component={NoteList} />
 
             {/* Route for note path */}
-            <Route exact path="/note/:noteId" component={NoteSidebar} />
-            <Route exact path="/note/:noteId" component={NoteDetail} />
+            <NoteError>
+              <Route exact path="/note/:noteId" component={NoteSidebar} />
+              <Route exact path="/note/:noteId" component={NoteDetail} />
+            </NoteError>
 
             {/* Route for add folder path */}
             <Route exact path="/add-folder" component={Sidebar} />
