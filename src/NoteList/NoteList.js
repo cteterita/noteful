@@ -11,7 +11,7 @@ class NoteList extends React.Component {
   static propTypes = {
     match: PropTypes.shape({
       params: PropTypes.shape({
-        folderId: PropTypes.string.isRequired,
+        folderId: PropTypes.string,
       }).isRequired,
     }).isRequired,
   }
