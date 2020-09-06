@@ -25,6 +25,7 @@ class NoteList extends React.Component {
   }
 
   filteredNotes() {
+    // If there is a folderId in match.params, filter for notes in that folder
     const { match } = this.props;
     const { folderId } = match.params;
     const { notes } = this.context;

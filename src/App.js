@@ -21,6 +21,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    // Fetch folders and notes before loading both into state
     const fetchFolders = fetch(`${BASE_URL}/folders`);
     const fetchNotes = fetch(`${BASE_URL}/notes`);
     Promise.all([fetchFolders, fetchNotes])
@@ -33,6 +34,7 @@ class App extends React.Component {
   }
 
   deleteNote = (noteId) => {
+    // Delete the note from the server
     const { notes } = this.state;
     fetch(`${BASE_URL}/notes/${noteId}`, {
       method: 'DELETE',
@@ -40,10 +42,12 @@ class App extends React.Component {
         'content-type': 'application/json',
       },
     });
+    // Filter state.notes to remove the note
     this.setState({ notes: notes.filter((n) => n.id !== noteId) });
   }
 
   addFolder = (name) => {
+    // Add the folder to the server
     const body = { name };
     fetch(`${BASE_URL}/folders`, {
       method: 'POST',
@@ -53,6 +57,7 @@ class App extends React.Component {
       body: JSON.stringify(body),
     })
       .then((response) => response.json())
+      // Add the folder to state.folders
       .then((folder) => {
         const { folders } = this.state;
         this.setState({ folders: [...folders, folder] });
@@ -60,6 +65,7 @@ class App extends React.Component {
   }
 
   addNote = (name, content, folderId) => {
+    // Add the note to the server
     const body = {
       name,
       content,
@@ -74,6 +80,7 @@ class App extends React.Component {
       body: JSON.stringify(body),
     })
       .then((response) => response.json())
+      // Add the note to state.notes
       .then((note) => {
         const { notes } = this.state;
         this.setState({ notes: [...notes, note] });

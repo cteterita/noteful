@@ -34,7 +34,6 @@ class NoteDetail extends React.Component {
     const { noteId } = match.params;
     const { deleteNote } = this.context;
     deleteNote(noteId);
-
     // Navigate back to the root directory
     const { push } = history;
     push('/');

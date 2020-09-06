@@ -19,10 +19,12 @@ class AddNote extends React.Component {
   }
 
   handleSubmit = (e) => {
+  // Pass folder name to addNote function in App
     e.preventDefault();
     const { addNote } = this.context;
     const noteForm = e.target;
     addNote(noteForm.noteName.value, noteForm.noteContent.value, noteForm.folderId.value);
+    // Clear form
     noteForm.reset();
   }
 

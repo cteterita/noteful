@@ -20,9 +20,11 @@ class AddFolder extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    // Pass folder name to addFolder function in App
     const { addFolder } = this.context;
     const folderForm = e.target;
     addFolder(folderForm.folderName.value);
+    // Clear form
     folderForm.reset();
   }
 
