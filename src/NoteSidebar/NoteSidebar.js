@@ -26,13 +26,11 @@ function NoteSidebar(props) {
                 Back
               </button>
               <ul>
-                <li>
-                  <Folder
-                    name={name}
-                    id={id}
-                    key={id}
-                  />
-                </li>
+                <Folder
+                  name={name}
+                  id={id}
+                  key={id}
+                />
               </ul>
             </section>
           );
