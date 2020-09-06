@@ -7,27 +7,32 @@ import Context from '../Context';
 function Sidebar() {
   return (
     <Context.Consumer>
-      {(context) => (
-        <section className="sidebar">
-          <ul>
-            {context.folders.map((f) => (
-              <Folder
-                name={f.name}
-                id={f.id}
-                key={f.id}
-              />
-            ))}
-          </ul>
-          <Link to="/add-folder">
-            <button
-              className="add-folder-button"
-              type="submit"
-            >
-              Add Folder
-            </button>
-          </Link>
-        </section>
-      )}
+      {(context) => {
+        const { folders } = context;
+        return (
+          <section className="sidebar">
+            {folders.length === 0 ? <h4>No folders found</h4> : (
+              <ul>
+                {folders.map((f) => (
+                  <Folder
+                    name={f.name}
+                    id={f.id}
+                    key={f.id}
+                  />
+                ))}
+              </ul>
+            )}
+            <Link to="/add-folder">
+              <button
+                className="add-folder-button"
+                type="submit"
+              >
+                Add Folder
+              </button>
+            </Link>
+          </section>
+        );
+      }}
     </Context.Consumer>
   );
 }
