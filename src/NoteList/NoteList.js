@@ -8,20 +8,12 @@ import Context from '../Context';
 class NoteList extends React.Component {
   static contextType = Context;
 
-  static defaultProps = {
-    match: {
-      params: {
-        folderId: '',
-      },
-    },
-  }
-
   static propTypes = {
     match: PropTypes.shape({
       params: PropTypes.shape({
-        folderId: PropTypes.string,
-      }),
-    }),
+        folderId: PropTypes.string.isRequired,
+      }).isRequired,
+    }).isRequired,
   }
 
   filteredNotes() {

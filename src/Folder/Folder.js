@@ -14,14 +14,9 @@ function Folder(props) {
   );
 }
 
-Folder.defaultProps = {
-  id: '',
-  name: '',
-};
-
 Folder.propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string,
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 export default Folder;

@@ -30,14 +30,12 @@ function NotePreview(props) {
 }
 
 NotePreview.defaultProps = {
-  id: '',
-  name: '',
   modified: '',
 };
 
 NotePreview.propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string,
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   modified: PropTypes.string,
 };
 

@@ -6,16 +6,10 @@ import Context from '../Context';
 class AddFolder extends React.Component {
   static contextType = Context;
 
-  static defaultProps = {
-    history: {
-      goBack: () => {},
-    },
-  }
-
   static propTypes = {
     history: PropTypes.shape({
-      goBack: PropTypes.func,
-    }),
+      goBack: PropTypes.func.isRequired,
+    }).isRequired,
   }
 
   handleSubmit = (e) => {

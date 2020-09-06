@@ -6,26 +6,15 @@ import Context from '../Context';
 class NoteDetail extends React.Component {
   static contextType = Context;
 
-  static defaultProps = {
-    match: {
-      params: {
-        noteId: '',
-      },
-    },
-    history: {
-      push: () => {},
-    },
-  };
-
   static propTypes = {
     match: PropTypes.shape({
       params: PropTypes.shape({
-        noteId: PropTypes.string,
-      }),
-    }),
+        noteId: PropTypes.string.isRequired,
+      }).isRequired,
+    }).isRequired,
     history: PropTypes.shape({
-      push: PropTypes.func,
-    }),
+      push: PropTypes.func.isRequired,
+    }).isRequired,
   }
 
   deleteNote = () => {

@@ -43,26 +43,15 @@ function NoteSidebar(props) {
   );
 }
 
-NoteSidebar.defaultProps = {
-  match: {
-    params: {
-      noteId: '',
-    },
-  },
-  history: {
-    goBack: () => {},
-  },
-};
-
 NoteSidebar.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
-      noteId: PropTypes.string,
-    }),
-  }),
+      noteId: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
   history: PropTypes.shape({
-    goBack: PropTypes.func,
-  }),
+    goBack: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default NoteSidebar;
