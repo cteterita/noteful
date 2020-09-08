@@ -18,6 +18,7 @@ class App extends React.Component {
     this.state = {
       folders: [],
       notes: [],
+      errorMessage: null,
     };
   }
 
@@ -31,6 +32,9 @@ class App extends React.Component {
           .then((folders) => this.setState({ folders }));
         responses[1].json()
           .then((notes) => this.setState({ notes }));
+      })
+      .catch((e) => {
+        this.setState({ errorMessage: `Error fetching data: ${e.message}` });
       });
   }
 
@@ -42,9 +46,14 @@ class App extends React.Component {
       headers: {
         'content-type': 'application/json',
       },
-    });
-    // Filter state.notes to remove the note
-    this.setState({ notes: notes.filter((n) => n.id !== noteId) });
+    })
+      .then(() => {
+        // Filter state.notes to remove the note
+        this.setState({ notes: notes.filter((n) => n.id !== noteId) });
+      })
+      .catch((e) => {
+        this.setState({ errorMessage: `Error deleting note: ${e.message}` });
+      });
   }
 
   addFolder = (name) => {
@@ -62,6 +71,10 @@ class App extends React.Component {
       .then((folder) => {
         const { folders } = this.state;
         this.setState({ folders: [...folders, folder] });
+        return folder;
+      })
+      .catch((e) => {
+        this.setState({ errorMessage: `Error adding folder: ${e.message}` });
       });
   }
 
@@ -85,6 +98,9 @@ class App extends React.Component {
       .then((note) => {
         const { notes } = this.state;
         this.setState({ notes: [...notes, note] });
+      })
+      .catch((e) => {
+        this.setState({ errorMessage: `Error adding note: ${e.message}` });
       });
   }
 
@@ -95,12 +111,14 @@ class App extends React.Component {
       addFolder: this.addFolder,
       addNote: this.addNote,
     };
+    const { errorMessage } = this.state;
     return (
       <>
         <header>
           <h1><Link to="/">Noteful</Link></h1>
         </header>
-        <main className="App">
+        <span className="error-message">{ errorMessage }</span>
+        <main>
           <Context.Provider value={contextValue}>
             {/* Route for root path */}
             <Route exact path="/" component={Sidebar} />

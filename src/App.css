@@ -7,3 +7,7 @@ header {
 main {
   display: flex;
 }
+
+.error-message {
+  color: red;
+}
