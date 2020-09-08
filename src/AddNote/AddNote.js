@@ -9,17 +9,19 @@ class AddNote extends React.Component {
   static propTypes = {
     history: PropTypes.shape({
       goBack: PropTypes.func.isRequired,
+      push: PropTypes.func.isRequired,
     }).isRequired,
   }
 
   handleSubmit = (e) => {
-  // Pass folder name to addNote function in App
     e.preventDefault();
+    // Pass note name to addNote function in App
     const { addNote } = this.context;
+    const { history } = this.props;
     const noteForm = e.target;
     addNote(noteForm.noteName.value, noteForm.noteContent.value, noteForm.folderId.value);
-    // Clear form
-    noteForm.reset();
+    // Go to the root route
+    history.push('/');
   }
 
   render() {

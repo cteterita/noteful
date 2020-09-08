@@ -71,7 +71,6 @@ class App extends React.Component {
       .then((folder) => {
         const { folders } = this.state;
         this.setState({ folders: [...folders, folder] });
-        return folder;
       })
       .catch((e) => {
         this.setState({ errorMessage: `Error adding folder: ${e.message}` });

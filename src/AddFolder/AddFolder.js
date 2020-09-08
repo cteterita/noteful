@@ -9,6 +9,7 @@ class AddFolder extends React.Component {
   static propTypes = {
     history: PropTypes.shape({
       goBack: PropTypes.func.isRequired,
+      push: PropTypes.func.isRequired,
     }).isRequired,
   }
 
@@ -16,10 +17,11 @@ class AddFolder extends React.Component {
     e.preventDefault();
     // Pass folder name to addFolder function in App
     const { addFolder } = this.context;
+    const { history } = this.props;
     const folderForm = e.target;
     addFolder(folderForm.folderName.value);
-    // Clear form
-    folderForm.reset();
+    // Go to the root route
+    history.push('');
   }
 
   render() {
