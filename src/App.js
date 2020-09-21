@@ -10,7 +10,7 @@ import AddNote from './AddNote/AddNote';
 import NoteError from './NoteError/NoteError';
 import './App.css';
 
-const BASE_URL = 'http://localhost:9090';
+const BASE_URL = 'http://localhost:8000';
 
 class App extends React.Component {
   constructor(props) {
