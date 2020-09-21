@@ -32,7 +32,7 @@ class NoteDetail extends React.Component {
     const { match } = this.props;
     const { noteId } = match.params;
     const { notes } = this.context;
-    const note = notes.find((n) => n.id === noteId);
+    const note = notes.find((n) => n.id === Number(noteId));
     if (note) {
       const { name, modified, content } = note;
       return (

@@ -12,10 +12,11 @@ function NoteSidebar(props) {
         const { noteId } = match.params;
         const { goBack } = history;
         const { notes, folders } = context;
-        const note = notes.find((n) => n.id === noteId);
+        const note = notes.find((n) => n.id === Number(noteId));
         let folderList = <></>;
         if (note) {
-          const folder = folders.find((f) => f.id === note.folderId);
+          const folder = folders.find((f) => f.id === note.folder_id);
+          console.log(folder);
           const { id, name } = folder;
           folderList = (
             <ul>
