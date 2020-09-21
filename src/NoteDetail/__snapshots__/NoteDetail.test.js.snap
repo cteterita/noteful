@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoteDetail component renders as expected 1`] = `
+<NoteDetail
+  history={
+    Object {
+      "push": [MockFunction],
+    }
+  }
+  match={
+    Object {
+      "params": Object {
+        "noteId": "123",
+      },
+    }
+  }
+/>
+`;

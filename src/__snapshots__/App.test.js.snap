@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App component renders as expected 1`] = `
+Array [
+  <header>
+    <h1>
+      <a
+        href="/"
+        onClick={[Function]}
+      >
+        Noteful
+      </a>
+    </h1>
+  </header>,
+  <span
+    className="error-message"
+  />,
+  <main>
+    <section
+      className="sidebar"
+    >
+      <h4>
+        No folders found
+      </h4>
+      <a
+        href="/add-folder"
+        onClick={[Function]}
+      >
+        <button
+          className="add-folder-button"
+          type="submit"
+        >
+          Add Folder
+        </button>
+      </a>
+    </section>
+    <section
+      className="NoteList"
+    >
+      <h4>
+        No notes found
+      </h4>
+      <a
+        href="/add-note"
+        onClick={[Function]}
+      >
+        <button
+          className="add-note-list"
+          type="submit"
+        >
+          Add Note
+        </button>
+      </a>
+    </section>
+  </main>,
+]
+`;
