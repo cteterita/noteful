@@ -49,7 +49,7 @@ class App extends React.Component {
     })
       .then(() => {
         // Filter state.notes to remove the note
-        this.setState({ notes: notes.filter((n) => n.id !== noteId) });
+        this.setState({ notes: notes.filter((n) => n.id !== Number(noteId)) });
       })
       .catch((e) => {
         this.setState({ errorMessage: `Error deleting note: ${e.message}` });
