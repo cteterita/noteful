@@ -23,9 +23,9 @@ class NoteList extends React.Component {
     let filteredNotes = notes;
     // If there is a folderId in match.params, filter for notes in that folder
     if (folderId) {
-      const folder = folders.find((f) => f.id === folderId);
+      const folder = folders.find((f) => f.id === Number(folderId));
       if (!folder) return (<h4>Folder not found</h4>);
-      filteredNotes = notes.filter((n) => n.folderId === folderId);
+      filteredNotes = notes.filter((n) => n.folder_id === Number(folderId));
     }
     if (filteredNotes.length === 0) return (<h4>No notes found</h4>);
     // Return the full list of filteredNotes
